@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block main-content %}
+    <div class="container">
+        <div class="row">
+            {% for recipe in recipes %}
+                <div class="col-sm-6">
+                    <article class="media content-section">
+                        <img class="rounded-circle article-img" src="{{ recipe.author.profile.image.url }}"
+                             alt="userpic">
+                        <div class="media-body">
+                            <div class="article-metadata">
+                                <a class="mr-2" href="{% url 'author-posts' recipe.author.username %}">{{ recipe.author }}</a>
+                                <small class="text-muted">{{ recipe.addition_date|date:"F d, Y" }}</small>
+                            </div>
+                            <h2><a class="article-title" href="{% url 'recipe' recipe.id %}">{{ recipe.name }}</a></h2>
+                            <p class="article-content">{{ recipe.description|safe|slice:':200' }}</p>
+                        </div>
+                    </article>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock main-content %}

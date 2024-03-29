@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block main-content %}
+    <div class="container">
+        <div class="text-center my-5">
+            <h1>Последние рецепты</h1>
+            <hr>
+        </div>
+        <div class="row row-cols-1 row-cols-lg-3 row-cols-md-2 g-4">
+            {% for recipe in recipes %}
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="{{ recipe.img.url }}" class="card-img-top" alt="recipe-img">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="{% url 'recipe' recipe.id %}">{{ recipe.name }}</a>
+                            </h5>
+                            <p class="card-text">{{ recipe.description|safe|slice:':100' }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <a class="mr-2 text-muted"
+                               href="{% url 'author-posts' recipe.author.username %}">{{ recipe.author }}</a>
+                            <small class="text-muted">{{ recipe.addition_date|date:"F d, Y" }}</small>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="pagination justify-content-center"> 
+    {% if is_paginated %}
+
+      {% if page_obj.has_previous %}
+        <a class="btn btn-outline-dark mb-4 mr-1" href="?page=1">Первая</a>
+        <a class="btn btn-outline-dark mb-4 mr-1" href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <a class="btn btn-dark mb-4 mr-1" href="?page={{ num }}">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <a class="btn btn-outline-dark mb-4 mr-1" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <a class="btn btn-outline-dark mb-4 mr-1" href="?page={{ page_obj.next_page_number }}">Следующая</a>
+        <a class="btn btn-outline-dark mb-4 mr-1" href="?page={{ page_obj.paginator.num_pages }}">Последняя</a>
+      {% endif %}
+
+    {% endif %}
+  </div>
+{% endblock main-content %}

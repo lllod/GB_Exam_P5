@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
-from .models import Recipe
+from .models import Recipe, Category
 from .forms import RecipeAddForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -19,7 +19,6 @@ class RecipeListView(ListView):
     model = Recipe
     template_name = 'recipesiteapp/index.html'
     context_object_name = 'recipes'
-    ordering = ['-addition_date']
 
     def get_queryset(self):
         return super().get_queryset().order_by('?')[:6]
@@ -29,7 +28,7 @@ class RecipeCreateView(CreateView):
     model = Recipe
     form_class = RecipeAddForm
     template_name = 'recipesiteapp/recipe_form.html'
-    success_url = reverse_lazy('recipe', kwargs={'pk': model.objects.last().pk})
+    success_url = reverse_lazy('recipe', kwargs={'pk': (model.objects.last().pk + 1)})
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -71,3 +70,16 @@ class AuthorRecipeListView(ListView):
     def get_queryset(self):
         author = get_object_or_404(User, username=self.kwargs.get('username'))
         return Recipe.objects.filter(author=author).order_by('-addition_date')
+
+
+class LastRecipeListView(ListView):
+    model = Recipe
+    template_name = 'recipesiteapp/last-recipes.html'
+    context_object_name = 'recipes'
+    paginate_by = 6
+    ordering = ['-addition_date']
+
+
+class CategoryRecipeListView(ListView):
+    model = Category
+    context_object_name = 'categories'

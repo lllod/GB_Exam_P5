@@ -13,12 +13,24 @@ body {
   font-family:Roboto;
 }
 
+.card-title a {
+  color: #333333;
+}
+
 h1, h2, h3, h4, h5, h6 {
   color: #444444;
 }
 
 ul {
   margin: 0;
+}
+
+.bg-color {
+    background-color: #4f4c4c;
+}
+
+.nav-dropdown {
+    color: #212529;
 }
 
 .site-header .navbar-nav .nav-link {
@@ -39,6 +51,10 @@ ul {
   border: 1px solid #dddddd;
   border-radius: 3px;
   margin-bottom: 20px;
+}
+
+.card img {
+    height: 280px;
 }
 
 .article-title {

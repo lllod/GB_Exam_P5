@@ -13,14 +13,14 @@ class Recipe(models.Model):
         ('5', 'Ивлев'),
     )
 
-    name = models.CharField(max_length=48)
-    description = models.TextField()
-    cooking_steps = models.TextField()
-    cooking_time = models.IntegerField(default=0)
-    img = models.ImageField(upload_to='recipe_images')
-    difficulty = models.CharField(max_length=8, choices=DIF_CHOICE, default='1')
+    name = models.CharField('Название', max_length=48)
+    description = models.TextField('Краткое описание')
+    cooking_steps = models.TextField('Этапы приготовления')
+    cooking_time = models.IntegerField('Время приготовления (мин.)', default=0)
+    img = models.ImageField('Изображение готового блюда', upload_to='recipe_images')
+    difficulty = models.CharField('Сложность', max_length=8, choices=DIF_CHOICE, default='1')
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    addition_date = models.DateTimeField(default=timezone.now)
+    addition_date = models.DateTimeField('Дата добавления', default=timezone.now)
 
     class Meta:
         verbose_name_plural = 'Рецепты'
@@ -33,7 +33,7 @@ class Recipe(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=24)
+    name = models.CharField('Категории', max_length=24)
     recipes = models.ManyToManyField(Recipe, through='RecipesCategories')
 
     class Meta:

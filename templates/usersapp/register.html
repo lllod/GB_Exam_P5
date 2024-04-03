@@ -6,16 +6,16 @@
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Добро пожаловать в клуб Python Bytes</legend>
+                <legend class="border-bottom mb-4">Регистрация на сайте с рецептами</legend>
                 {{ form|crispy }}
             </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-dark" type="submit">Регистрация</button>
+            <div class="form-group mt-4">
+                <button class="btn btn-outline-secondary" type="submit">Регистрация</button>
             </div>
         </form>
         <div class="border-top pt-3">
             <small class="text-muted">
-                Уже есть аккаунт? <a class="ml-2" href="#">Вход</a>
+                Уже есть аккаунт? <a class="ml-2" href="{% url 'login' %}">Вход</a>
             </small>
         </div>
     </div>

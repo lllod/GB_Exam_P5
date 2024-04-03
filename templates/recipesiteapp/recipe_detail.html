@@ -1,25 +1,43 @@
 {% extends "base.html" %}
 
 {% block main-content %}
-    <article class="media content-section">
-        <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}" alt="{{ object.name }}">
-        <div class="media-body">
-            <div class="article-metadata">
-                <a class="mr-2" href="{% url 'author-posts' recipe.author.username %}">{{ object.author }}</a>
-                <small class="text-muted">{{ object.addition_date|date:"F d, Y" }}</small>
-                {% if object.author == user %}
-                    <div>
-                        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'recipe-upd' object.id %}">Редактировать</a>
-                        <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'recipe-del' object.id %}">Удалить</a>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card mb-4">
+                    <img src="{{ recipe.img.url }}" class="card-img-top mx-auto d-block" alt="{{ recipe.name }}">
+                    <div class="card-body">
+                        <h1 class="card-title">{{ recipe.name }}</h1>
+                        <p>{{ test_data }}</p>
+                        <p class="card-text text-muted">Автор: <a
+                                href="{% url 'author-posts' recipe.author.username %}">{{ recipe.author }}</a></p>
+                        <p class="card-text text-muted">Время приготовления: {{ recipe.cooking_time }} мин.</p>
+                        <p class="card-text text-muted">Сложность: {{ recipe.get_difficulty_display }}</p>
+                        <div class="d-flex flex-wrap mb-3">
+                            <strong>Категории:</strong>
+                            {% for category in categories %}
+                                <span class="badge bg-primary mx-1"><a
+                                        href="{% url 'category-list' category.id %}">{{ category.name }}</a></span>
+                            {% endfor %}
+                        </div>
+                        {% if object.author == user %}
+                            <div>
+                                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'recipe-upd' object.id %}">Редактировать</a>
+                                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'recipe-del' object.id %}">Удалить</a>
+                            </div>
+                        {% endif %}
+                        <p class="card-text recipe-description">{{ recipe.description }}</p>
+                        <h2 class="card-title">Этапы приготовления:</h2>
+                        <ol class="cooking-steps row row-cols-1 row-cols-md-2 row-cols-lg-3">
+                            {% for step in cooking_steps %}
+                                <li class="col-12 col-md-6 col-lg-4">{{ step }}</li>
+                            {% endfor %}
+                        </ol>
                     </div>
-                {% endif %}
+                </div>
             </div>
-            <h2 class="article-title">{{ object.name }}</h2>
-            <p class="article-content"><img class="article-img" src="{{ object.img.url }}" alt="{{ object.name }}"></p>
-            <h2 class="article-title">Описание</h2>
-            <p class="article-content">{{ object.description }}</p>
-            <h2 class="article-title">Этапы приготовления</h2>
-            <p class="article-content">{{ object.cooking_steps }}</p>
         </div>
-    </article>
-{% endblock main-content %}
+    </div>
+
+{% endblock %}

@@ -1,114 +1,154 @@
 ﻿body,
 html {
- width:100%;
- height:100%
+    width: 100%;
+    height: 100%
 }
 
 body {
-  margin:0;
-  padding:0;
-  background: #fafafa;
-  color: #333333;
-  margin-top: 5rem;
-  font-family:Roboto;
+    padding: 0;
+    background: #fafafa;
+    color: #333333;
+    margin: 5rem 0 0;
+    font-family: Roboto;
+}
+
+a {
+    text-decoration: none;
+}
+
+.badge a {
+    color: white;
+}
+
+.card-title a {
+    color: #333333;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #444444;
+    color: #444444;
 }
 
 ul {
-  margin: 0;
+    margin: 0;
 }
 
-.site-header .navbar-nav .nav-link {
-  color: #cbd5db;
+.bg-color {
+    background-color: #4f4c4c;
 }
 
-.site-header .navbar-nav .nav-link:hover {
-  color: #ffffff;
+.navbar-dark .navbar-nav .nav-link {
+    color: #cbd5db;
 }
 
-.site-header .navbar-nav .nav-link.active {
-  font-weight: 500;
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: #ffffff;
 }
 
 .content-section {
-  background: #ffffff;
-  padding: 10px 20px;
-  border: 1px solid #dddddd;
-  border-radius: 3px;
-  margin-bottom: 20px;
+    background: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 20px;
 }
 
-.article-title {
-  color: #444444;
-}
-
-a.article-title:hover {
-  color: #428bca;
-  text-decoration: none;
-}
-
-.article-content {
-  white-space: pre-line;
-}
-
-.article-img {
-  height: 65px;
-  width: 65px;
-  margin-right: 16px;
-}
-
-.article-metadata {
-  padding-bottom: 1px;
-  margin-bottom: 4px;
-  border-bottom: 1px solid #e3e3e3
-}
-
-.article-metadata a:hover {
-  color: #333;
-  text-decoration: none;
-}
-
-.article-svg {
-  width: 25px;
-  height: 25px;
-  vertical-align: middle;
+.card img {
+    max-height: 426px;
+    max-width: 640px;
 }
 
 .account-img {
-  height: 125px;
-  width: 125px;
-  margin-right: 20px;
-  margin-bottom: 16px;
+    height: 125px;
+    width: 125px;
+    margin-right: 20px;
+    margin-bottom: 16px;
 }
 
 .account-heading {
-  font-size: 2.5rem;
+    font-size: 2.5rem;
 }
 
 footer {
- position: sticky!important;
- top: 100%;
- padding-top:25px;
- padding-bottom:25px;
- border-top:1px solid #ddd;
+    position: sticky;
+    top: 100%;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    border-top: 1px solid #ddd;
 }
 
 footer p {
- margin:2px;
- text-align:center;
- padding:0 40px;
- color:#fff;
- font-size:12px;
+    margin: 2px;
+    text-align: center;
+    padding: 0 40px;
+    color: #fff;
+    font-size: 12px;
 }
 
-footer a{
-  color:#777
+footer a {
+    color: #cbd5db
 }
 
 footer a:hover {
-  color:#777;
-  text-decoration: none;
+    color: #757a7a;
+    text-decoration: none;
+}
+
+.recipe-description {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+    text-align: justify;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    box-shadow: 1px 3px 14px 1px #c5c5c5;
+}
+
+.cooking-steps {
+    list-style-type: none;
+    padding: 0;
+    counter-reset: step-counter;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.cooking-steps li {
+    position: relative;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 10px 10px 10px 40px;
+    width: calc((100% - 40px) / 3);
+    margin-bottom: 20px;
+}
+
+.cooking-steps li::before {
+    content: counter(step-counter);
+    counter-increment: step-counter;
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #007bff;
+    color: #fff;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 30px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+@media (max-width: 992px) {
+    .cooking-steps li {
+        width: calc((100% - 30px) / 2);
+    }
+}
+
+@media (max-width: 768px) {
+    .cooking-steps li {
+        width: calc(100% - 30px);
+    }
 }

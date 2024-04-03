@@ -2,13 +2,13 @@
 {% block main-content %}
     <div class="container">
         <div class="text-center my-5">
-            <h1>Рецепты пользователя {{ view.kwargs.username }}</h1>
+            <h1>Рецепты в категории "{{ category.name }}"</h1>
             <h3>
                 {% if page_obj.paginator.count == 1 %}
                     ({{ page_obj.paginator.count }} рецепт)
-                    {% elif 2 <= page_obj.paginator.count and page_obj.paginator.count <= 4  %}
+                {% elif 2 <= page_obj.paginator.count and page_obj.paginator.count <= 4 %}
                     ({{ page_obj.paginator.count }} рецепта)
-                    {% else %}
+                {% else %}
                     ({{ page_obj.paginator.count }} рецептов)
                 {% endif %}
             </h3>
@@ -34,13 +34,13 @@
                 </div>
             {% endfor %}
         </div>
+
         <div class="pagination justify-content-center">
             {% if is_paginated %}
 
                 {% if page_obj.has_previous %}
                     <a class="btn btn-outline-dark mb-4 mr-1" href="?page=1">Первая</a>
-                    <a class="btn btn-outline-dark mb-4 mr-1"
-                       href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+                    <a class="btn btn-outline-dark mb-4 mr-1" href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
                 {% endif %}
 
                 {% for num in page_obj.paginator.page_range %}
